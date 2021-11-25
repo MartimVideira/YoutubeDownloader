@@ -100,7 +100,7 @@ class YoutubeApp:
     def youtube_window(self):
         # Initializing the window controlls
         youtube_window = tk.Toplevel(self.main_window)
-        youtube_window.geometry("585x168")
+        youtube_window.geometry("700x168")
         youtube_window.resizable(False, False)
 
         # Opening the broser
@@ -128,7 +128,7 @@ class YoutubeApp:
 
     def link_download_window(self):
         link_download_window = tk.Toplevel(self.main_window)
-        link_download_window.geometry("588x205")
+        link_download_window.geometry("700x205")
         link_download_window.resizable(False, False)
 
         download_path_frame = self.download_path_frame(link_download_window)
