@@ -6,25 +6,39 @@ from pytube import YouTube
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import os
 
 
 
 class Youtube:
     LINK = "https://www.youtube.com/"
-    CHROME_PATH = "C:\Program Files (x86)\chromedriver.exe"
+    DOWNLOAD_DIR_NAME = "Downloads"
 
 
 
     def __init__(self):
         self.driver = webdriver.Chrome(ChromeDriverManager().install())
-        self.download_path = ""
+        self.download_path = None
     def open_browser(self):
         self.driver.get(Youtube.LINK)
         self.driver.maximize_window()
         # Handeling Coookies
         self.driver.implicitly_wait(4)
         wait = WebDriverWait(self.driver,10)
-        cookies = wait.until(EC.element_to_be_clickable((By.XPATH,"//ytd-button-renderer[2]/a/tp-yt-paper-button"))).click()
+        cookies = wait.until(EC.element_to_be_clickable((By.XPATH,"//ytd-button-renderer[2]/a/tp-yt-paper-button")))
+        cookies.click()
+
+    def create_download_folder(self):
+        #Setting the path
+        if self.download_path is None:
+            working_dir = os.path.abspath(os.getcwd())
+            self.download_path = os.path.join(working_dir,Youtube.DOWNLOAD_DIR_NAME)
+        #Creating the directory
+        if not os.path.isdir(self.download_path):
+            os.mkdir(self.download_path)
+        
+
+
 
     def close_browser(self):
         self.driver.quit()
@@ -95,4 +109,4 @@ if __name__ == '__main__':
     yt = Youtube()
     yt.open_browser()
     print(yt.search_by_name("Da me tu cusita"))
-    yt.download_video('https://www.youtube.com/watch?v=DmWWqogr_r8')
+    yt.create_download_folder()

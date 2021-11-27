@@ -68,14 +68,14 @@ class YoutubeApp:
         download_buttons_frame = tk.Frame(window)
 
         download_mp3_button = tk.Button(download_buttons_frame, text='MP3', bg="#FF0000",
-                                        fg='white', height=7, width=40, command=mp3_button_command)
+                                        fg='white', height=6, width=41, command=mp3_button_command)
         download_mp3_button.grid(
-            column=0, row=0, sticky="swe", columnspan=1, pady=20)
+            column=0, row=0, sticky="swen",padx=1)
 
         download_video_button = tk.Button(download_buttons_frame, text="Video",
-                                          bg="#D6B417", fg='white', height=7, width=40, command=video_button_command)
+                                          bg="#D6B417", fg='white', height=6, width=41, command=video_button_command)
         download_video_button.grid(
-            column=1, row=0, sticky="swe", columnspan=1, pady=20)
+            column=1, row=0, sticky="swen")
 
         return download_buttons_frame
 
@@ -88,19 +88,19 @@ class YoutubeApp:
         download_path_label.grid(column=0, row=0, sticky="e",)
 
         show_download_path = tk.Label(
-            download_path_frame, width=58, anchor='w', relief=tk.SUNKEN, textvariable=self.path_var_tk)
+            download_path_frame, width=60, anchor='w', relief=tk.SUNKEN, textvariable=self.path_var_tk)
         show_download_path.grid(column=1, row=0, sticky="w")
 
         set_path_button = tk.Button(
             download_path_frame, text='Set New Path', command=self.get_new_path)
-        set_path_button.grid(column=2, row=0, sticky='we')
+        set_path_button.grid(column=2, row=0, sticky='we',padx=10)
 
         return download_path_frame
 
     def youtube_window(self):
         # Initializing the window controlls
         youtube_window = tk.Toplevel(self.main_window)
-        youtube_window.geometry("700x168")
+        youtube_window.geometry("885x168")
         youtube_window.resizable(False, False)
 
         # Opening the broser
@@ -128,11 +128,11 @@ class YoutubeApp:
 
     def link_download_window(self):
         link_download_window = tk.Toplevel(self.main_window)
-        link_download_window.geometry("700x205")
-        link_download_window.resizable(False, False)
+        link_download_window.geometry("885x208")
+        link_download_window.resizable(True, True)
 
         download_path_frame = self.download_path_frame(link_download_window)
-        download_path_frame.grid(column=0, row=0, columnspan=3, pady=10)
+        download_path_frame.grid(column=0, row=0, columnspan=3, pady=10,padx=2)
 
         insert_link_label = tk.Label(
             link_download_window, text="Insert Link:", anchor='w')
@@ -140,7 +140,7 @@ class YoutubeApp:
 
         link_var = tk.StringVar()
         insert_link_entry = tk.Entry(
-            link_download_window, textvariable=link_var, width=73,)
+            link_download_window, textvariable=link_var, width=78)
         insert_link_entry.grid(column=1, row=1, sticky="w")
 
         # Button functions:
@@ -150,7 +150,7 @@ class YoutubeApp:
         download_buttons_frame = self.download_buttons_frame(
             link_download_window, mp3_link_download, video_link_download)
 
-        download_buttons_frame.grid(column=0, row=2, columnspan=3)
+        download_buttons_frame.grid(column=0, row=2,columnspan=2)
 
         def on_closing():
             link_download_window.destroy()
