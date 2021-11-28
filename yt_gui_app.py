@@ -133,12 +133,12 @@ class YoutubeApp:
         download_path_frame.grid(column=0, row=0, columnspan=3, pady=2, padx=2)
 
         insert_link_label = tk.Label(
-            link_download_window, text="Insert Link:", anchor='w')
-        insert_link_label.grid(column=0, row=1, sticky='e')
+            link_download_window, text="Insert Link:", anchor='e')
+        insert_link_label.grid(column=0, row=1, sticky='we', padx=5)
 
         link_var = tk.StringVar()
         insert_link_entry = tk.Entry(
-            link_download_window, textvariable=link_var, width=70)
+            link_download_window, textvariable=link_var, width=80)
         insert_link_entry.grid(column=1, row=1, sticky="we")
 
         # Button functions:
