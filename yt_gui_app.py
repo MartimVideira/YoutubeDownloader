@@ -138,8 +138,8 @@ class YoutubeApp:
 
         link_var = tk.StringVar()
         insert_link_entry = tk.Entry(
-            link_download_window, textvariable=link_var, width=88)
-        insert_link_entry.grid(column=1, row=1, sticky="w")
+            link_download_window, textvariable=link_var, width=70)
+        insert_link_entry.grid(column=1, row=1, sticky="we")
 
         # Button functions:
         def mp3_link_download(): return self.download_mp3(link_var.get())
