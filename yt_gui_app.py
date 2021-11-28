@@ -3,6 +3,7 @@ import tkinter as tk
 import tkinter.font as font
 from youtube import Youtube
 from tkinter import filedialog
+import threading
 
 
 class YoutubeApp:
@@ -38,10 +39,13 @@ class YoutubeApp:
         self.path_var_tk.set(selected_folder)
 
     def download_mp3(self, link=None):
-        self.youtube_browser.download_mp3(link)
+        t1 = threading.Thread(target=self.youtube_browser.download_mp3,args=[link]  )
+        t1.start()
+       
 
     def download_video(self, link=None):
-        self.youtube_browser.download_video(link)
+        t1 = threading.Thread(target=self.youtube_browser.download_video,args=[link])
+        t1.start()
 
     def menu_window(self):
         root = tk.Tk()

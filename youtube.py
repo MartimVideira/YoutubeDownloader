@@ -17,9 +17,10 @@ class Youtube:
 
 
     def __init__(self):
-        self.driver = webdriver.Chrome(ChromeDriverManager().install())
         self.download_path = None
+        self.driver =  None
     def open_browser(self):
+        self.driver = webdriver.Chrome(ChromeDriverManager().install())
         self.driver.get(Youtube.LINK)
         self.driver.maximize_window()
         # Handeling Coookies
@@ -93,8 +94,6 @@ class Youtube:
             ydl.download([link])
 
     def download_video(self, link=None):
-        # if not link:
-        # link = self.driver.current_url
         if not link:
             if self.valid_yt_link(self.driver.current_url):
                 link = self.driver.current_url
@@ -105,8 +104,6 @@ class Youtube:
         video_stream.download(self.download_path)
 
 
-if __name__ == '__main__':
-    yt = Youtube()
-    yt.open_browser()
-    print(yt.search_by_name("Da me tu cusita"))
-    yt.create_download_folder()
+
+
+mytube = Youtube()
