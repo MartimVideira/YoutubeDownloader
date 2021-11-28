@@ -138,7 +138,7 @@ class YoutubeApp:
 
         link_var = tk.StringVar()
         insert_link_entry = tk.Entry(
-            link_download_window, textvariable=link_var, width=80)
+        link_download_window, textvariable=link_var, width=75)
         insert_link_entry.grid(column=1, row=1, sticky="we")
 
         # Button functions:
@@ -148,7 +148,7 @@ class YoutubeApp:
         download_buttons_frame = self.download_buttons_frame(
             link_download_window, mp3_link_download, video_link_download)
 
-        download_buttons_frame.grid(column=0, row=2, columnspan=2, pady=1)
+        download_buttons_frame.grid(column=0, row=2, columnspan=3, pady=1)
 
         def on_closing():
             link_download_window.destroy()
