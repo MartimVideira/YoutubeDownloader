@@ -14,8 +14,6 @@ class Youtube:
     LINK = "https://www.youtube.com/"
     DOWNLOAD_DIR_NAME = "Downloads"
 
-
-
     def __init__(self):
         self.download_path = None
         self.driver =  None
@@ -25,9 +23,9 @@ class Youtube:
         self.driver.maximize_window()
         # Handeling Coookies
         self.driver.implicitly_wait(4)
-        wait = WebDriverWait(self.driver,10)
-        cookies = wait.until(EC.element_to_be_clickable((By.XPATH,"//ytd-button-renderer[2]/a/tp-yt-paper-button")))
-        cookies.click()
+        #wait = WebDriverWait(self.driver,10)
+        #cookies = wait.until(EC.element_to_be_clickable((By.XPATH,"//ytd-button-renderer[2]/a/tp-yt-paper-button")))
+        #cookies.click()
 
     def create_download_folder(self):
         #Setting the path
@@ -39,8 +37,6 @@ class Youtube:
             os.mkdir(self.download_path)
         
 
-
-
     def close_browser(self):
         self.driver.quit()
 
@@ -49,7 +45,6 @@ class Youtube:
 
     def get_download_path(self):
         return self.download_path
-
 
     #Searches a video by its name and returns the first link on the result search
     def search_by_name(self, video_name):
@@ -71,7 +66,6 @@ class Youtube:
     
         return True
 
-
     def download_mp3(self, link=None):
         # Dowloads the current video  or a video from the given link to a specified location
         # Has the option to download only audio or mp3
@@ -91,7 +85,10 @@ class Youtube:
             }],
         }
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([link])
+            try:
+                ydl.download([link])
+            except:
+                ydl.download([link])
 
     def download_video(self, link=None):
         if not link:
@@ -102,8 +99,6 @@ class Youtube:
         video = YouTube(link)
         video_stream = video.streams.get_highest_resolution()
         video_stream.download(self.download_path)
-
-
 
 
 mytube = Youtube()
